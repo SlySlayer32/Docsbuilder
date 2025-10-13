@@ -93,12 +93,23 @@ Before extending, understand:
    export const generateDocumentation = (answers: Answer[], projectName: string) => {
      const docs: { [path: string]: string } = {};
      
+     // Helper function (already exists in docGenerator.ts)
+     const getAnswer = (questionId: string) => 
+       answers.find(a => a.questionId === questionId);
+     
      // ... existing code ...
      
      // Get answer for new question
      const apiAnswer = getAnswer('api-integration');
      const selectedAPIs = apiAnswer?.selectedOptions || [];
      const apiDetails = apiAnswer?.details;
+     
+     // API type labels for display
+     const apiLabels: { [key: string]: string } = {
+       rest: 'REST API',
+       graphql: 'GraphQL',
+       websocket: 'WebSocket',
+     };
      
      // Generate documentation
      docs['/api/integration.md'] = `# API Integration
@@ -110,14 +121,10 @@ This document outlines the API integration strategy for ${projectName}.
 ## Selected Integration Methods
 
 ${selectedAPIs.length > 0 ? selectedAPIs.map(api => {
-  const labels = {
-    rest: 'REST API',
-    graphql: 'GraphQL',
-    websocket: 'WebSocket',
-  };
-  return `### ${labels[api] || api}
+  const label = apiLabels[api] || api;
+  return `### ${label}
 
-Implementation details for ${labels[api] || api} integration...
+Implementation details for ${label} integration...
 `;
 }).join('\n') : 'No API integration method selected.'}
 
