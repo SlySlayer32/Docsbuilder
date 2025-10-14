@@ -1,29 +1,64 @@
-# Docsbuilder
+# Docsbuilder 🚀
 
-> Transform project ideas into comprehensive, AI-ready documentation through an interactive interview process.
+> **"Describe your project in plain English, and AI generates complete, production-ready documentation."**
+
+Transform project ideas into comprehensive, AI-optimized documentation with arc42+C4 architecture diagrams and code patterns.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646cff?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 
+## 🎯 What Makes Docsbuilder Different
+
+Instead of clicking through questionnaires, just **type one sentence**:
+
+```
+"A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards"
+```
+
+**AI expands this into:**
+- ✅ 45+ production-ready documentation files
+- ✅ arc42 architecture documentation
+- ✅ C4 model diagrams (Context, Container, Component)
+- ✅ 15+ code patterns (technology-specific)
+- ✅ Rich metadata for AI tools (GitHub Copilot, ChatGPT)
+
+**⏱️ Time: 2 minutes total** (5 seconds to describe, 10 seconds AI expansion, 1 minute review, 5 seconds generation)
+
+---
+
 ## 🚀 Overview
 
-**Docsbuilder** is a modern documentation generator that collects project requirements through a guided interview and generates structured, AI-optimized markdown documentation. Perfect for:
-- 📋 Project planning and specification
-- 🤖 AI-assisted development (GitHub Copilot, ChatGPT, Claude)
-- 👥 Stakeholder communication
-- 📚 Knowledge management
+**Docsbuilder** is the first AI-powered documentation generator that understands your project idea and creates complete, production-ready documentation optimized for:
+- 🤖 **AI-Assisted Development** - GitHub Copilot, ChatGPT, Claude
+- � **Project Planning** - arc42 + C4 compliant specifications
+- �👥 **Stakeholder Communication** - Clear, comprehensive project documentation
+- ⚡ **Rapid Prototyping** - From idea to architecture in minutes
 
-## ✨ Features
+---
 
-- **🎯 Smart Interview System** - Selection-based questions with optional details
-- **📝 Comprehensive Documentation** - 40+ markdown files covering all project aspects
-- **🤖 AI-Ready Format** - Structured for optimal AI tool consumption
-- **✏️ Live Editor** - Edit and refine docs with real-time preview
-- **📦 Export Options** - Download as JSON, Markdown, or ZIP
+## ✨ Key Features
+
+### Current (Phase 1 - ✅ Complete)
+- **📝 45+ Documentation Files** - Comprehensive coverage of all project aspects
+- **🏗️ arc42 Structure** - Industry-standard architecture documentation
 - **🎨 Modern UI** - Beautiful interface with dark mode support
-- **⚡ Fast & Responsive** - Built with Vite for lightning-fast performance
+- **✏️ Live Editor** - Edit and refine docs with real-time markdown preview
+- **📦 Multiple Export Options** - JSON, Markdown, ZIP
+- **⚙️ Technology Maps** - Framework-specific best practices and patterns
+
+### Coming Soon (Phase 2-3 - ⏳ In Progress)
+- **� Freeform Input** - Describe projects in plain English
+- **🤖 AI Expansion** - GPT-4/Claude intelligently expands requirements
+- **🧠 Smart Clarification** - AI asks only essential follow-up questions
+- **🎨 C4 Diagrams** - Auto-generated Context, Container, and Component diagrams
+- **📚 Pattern Library** - 30+ production-ready code patterns
+- **🔗 Pattern Injection** - Technology-specific code examples in documentation
+- **🎯 Metadata Blocks** - Rich metadata for optimal AI comprehension
+
+👉 **See the full vision**: [AI Vision Document](./AI-VISION.md)  
+👉 **Implementation details**: [AI-Powered Roadmap](./docs/research/AI-POWERED-ROADMAP.md)
 
 ## 📸 Screenshots
 

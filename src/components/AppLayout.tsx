@@ -36,7 +36,10 @@ export default function AppLayout() {
   };
 
   const handleInterviewComplete = (answers: Answer[]) => {
+    console.log('🎯 [AppLayout] Interview complete, generating documentation...');
+    console.log('📋 [AppLayout] Answers:', answers);
     const docs = generateDocumentation(answers, projectName);
+    console.log('📦 [AppLayout] Received docs object with', Object.keys(docs).length, 'files');
     setDocumentation(docs);
     setCurrentView('documentation');
   };

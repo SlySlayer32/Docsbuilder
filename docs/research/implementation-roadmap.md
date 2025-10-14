@@ -1,8 +1,60 @@
-# Implementation Roadmap: AI-Ready Documentation Generation
+# Implementation Roadmap: AI-Powered Documentation Generation
 
 **Status**: Ready for Implementation  
 **Priority**: High  
-**Related**: [Full Research Document](./ai-ready-documentation-research.md)
+**Related Documents**: 
+- [Full Research Document](./ai-ready-documentation-research.md)
+- **[NEW: AI-Powered Roadmap](./AI-POWERED-ROADMAP.md)** ⭐ Complete implementation guide
+
+---
+
+## 🎯 Vision
+
+Transform project documentation from a tedious, time-consuming process into a **simple, conversational experience**. Users describe their project in plain English, and AI generates complete, production-ready, arc42+C4 documentation with code patterns, diagrams, and metadata optimized for GitHub Copilot and other AI development tools.
+
+## 🚀 Quick Start
+
+**For the complete, up-to-date implementation guide with AI-powered freeform input, see:**  
+👉 **[AI-Powered Roadmap](./AI-POWERED-ROADMAP.md)**
+
+### New User Experience:
+1. **User types**: "A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards"
+2. **AI expands**: Tech stack, core + production features, patterns, architecture
+3. **User reviews**: Edit, confirm, or ask clarifying questions
+4. **One-click generate**: 45+ docs with metadata, diagrams, and code patterns
+
+---
+
+## 📌 Implementation Status
+
+### ✅ Phase 1: Core Documentation (COMPLETE)
+- [x] 45+ markdown files generated
+- [x] arc42 structure implemented
+- [x] Technology-specific content maps
+- [x] Enhanced interview questions
+- [x] Documentation viewer with export
+
+### ⏳ Phase 2: AI Requirements Capture (IN PROGRESS)
+See [AI-Powered Roadmap](./AI-POWERED-ROADMAP.md) for:
+- [ ] Freeform input component
+- [ ] AI expansion service (GPT-4/Claude integration)
+- [ ] Interactive requirements review screen
+- [ ] Smart clarification questions
+
+### ⏳ Phase 3: Advanced Pattern Library
+See [AI-Powered Roadmap](./AI-POWERED-ROADMAP.md) for:
+- [ ] 30+ production-ready patterns
+- [ ] Pattern selection algorithm
+- [ ] arc42+C4 compliant pattern docs
+- [ ] Technology-specific code examples
+
+### ⏳ Phase 4: Enhanced Generation
+See [AI-Powered Roadmap](./AI-POWERED-ROADMAP.md) for:
+- [ ] Metadata blocks for AI comprehension
+- [ ] C4 diagram generation
+- [ ] Pattern integration
+- [ ] Documentation validation
+- [ ] Quality scoring
 
 ---
 
@@ -14,695 +66,740 @@
 2. **Structured formatting** with metadata significantly improves AI comprehension
 3. **40+ documentation files** across 12 categories provides optimal context
 4. **Pattern-based generation** ensures consistency and completeness
+5. **Freeform input + AI expansion** is more user-friendly and powerful than rigid questionnaires
+6. **Intent inference** allows AI to add production-grade requirements users might overlook
 
 ### What We Need to Build
 
-1. **Expand documentation generator** from 5 files to 40+ files
-2. **Create pattern library** with reusable templates for common scenarios
-3. **Enhance interview questions** to capture more technical detail
-4. **Implement arc42 structure** in generated documentation
+1. **AI-powered requirements capture** using natural language processing
+2. **Smart intent expansion** to infer production needs from user descriptions
+3. **Interactive review system** for users to confirm and refine requirements
+4. **Advanced pattern library** with arc42+C4 compliance and rich metadata
+5. **Automated documentation generator** creating 45+ interconnected files
+6. **One-click generation** with real-time preview and export
 
 ---
 
-## Phase 1: Core Expansion (Weeks 1-2)
+## User Experience Flow
 
-### Goal
-Expand documentation generation to cover all essential project aspects with arc42 structure.
+### 1. Freeform Project Description
+**User sees:** A simple, friendly input box with prompt:  
+*"Describe your project in plain English. For example: 'A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards.'"*
 
-### Tasks
+**User types/speaks:** Any natural description of their project idea.
 
-#### 1. Expand `src/utils/docGenerator.ts`
+### 2. AI-Powered Intent Expansion
+**Behind the scenes:**
+- AI model (GPT-4, Claude) parses the description
+- Extracts: tech stack, domain, features, user types, scale, deployment targets
+- Infers production needs: authentication, payments, analytics, notifications, security, error handling, scaling, CI/CD
+- Generates comprehensive requirements list with rationale
 
-**Add these new documentation files**:
+### 3. Interactive Review Screen
+**User sees:** Expanded requirements with sections:
+- **Tech Stack**: Flutter, Firebase, iOS/Android deployment
+- **Core Features**: Game logic, user auth, subscriptions, leaderboards
+- **Production Features**: Push notifications, analytics, crash reporting, secure storage
+- **Architecture**: arc42 sections, C4 diagrams
+- **Patterns**: Authentication, payment integration, leaderboard sync, etc.
 
-```typescript
-// Business Context (arc42 Section 1-3)
-docs['/project/goals-and-constraints.md'] = generateGoalsAndConstraints(answers);
-docs['/project/stakeholders.md'] = generateStakeholders(answers);
-docs['/project/context-and-scope.md'] = generateContextAndScope(answers);
+**User can:**
+- ✅ Confirm requirements
+- ✏️ Edit or refine any item
+- ➕ Add missing requirements
+- ❌ Remove unnecessary items
+- 💬 Ask follow-up questions (AI responds contextually)
 
-// Architecture (arc42 Section 4-8)
-docs['/architecture/solution-strategy.md'] = generateSolutionStrategy(answers);
-docs['/architecture/building-blocks.md'] = generateBuildingBlocks(answers);
-docs['/architecture/runtime-view.md'] = generateRuntimeView(answers);
-docs['/architecture/deployment-view.md'] = generateDeploymentView(answers);
-docs['/architecture/cross-cutting-concepts.md'] = generateCrossCuttingConcepts(answers);
+### 4. Smart Clarification Questions
+**AI asks only when needed:**
+- "Do you want social login (Google, Apple) in addition to email/password?"
+- "Should leaderboards sync across devices in real-time?"
+- "Would you like daily/weekly challenges to increase engagement?"
+- "Do you need offline play mode?"
 
-// Technical Details
-docs['/api/rest-endpoints.md'] = generateAPIEndpoints(answers);
-docs['/api/authentication.md'] = generateAuthentication(answers);
-docs['/api/error-handling.md'] = generateAPIErrorHandling(answers);
+### 5. Pattern & Documentation Generation
+**One-click generation creates:**
+- ✅ 45+ markdown files (arc42 structure)
+- ✅ C4 diagrams (Context, Container, Component, Code)
+- ✅ Metadata blocks for AI comprehension
+- ✅ Code patterns specific to Flutter + Firebase
+- ✅ Cross-referenced documentation
+- ✅ Production-ready architecture guide
 
-docs['/frontend/components.md'] = generateComponentLibrary(answers);
-docs['/frontend/routing.md'] = generateRouting(answers);
-docs['/frontend/state-management.md'] = generateStateManagement(answers);
-
-docs['/backend/business-logic.md'] = generateBusinessLogic(answers);
-docs['/backend/data-access.md'] = generateDataAccess(answers);
-docs['/backend/validation.md'] = generateValidation(answers);
-
-// Quality & Operations
-docs['/testing/strategy.md'] = generateTestingStrategy(answers);
-docs['/deployment/environments.md'] = generateEnvironments(answers);
-docs['/deployment/ci-cd.md'] = generateCICD(answers);
-docs['/security/overview.md'] = generateSecurityOverview(answers);
-```
-
-#### 2. Create Technology-Specific Content Maps
-
-**File**: `src/data/technologyMaps.ts`
-
-```typescript
-export const frontendMaps = {
-  react: {
-    name: 'React',
-    description: 'Component-based UI library',
-    rationale: 'Large ecosystem, excellent TypeScript support, component reusability',
-    bestPractices: [
-      'Use functional components with hooks',
-      'Implement proper prop types with TypeScript',
-      'Follow component composition patterns',
-      'Use React.memo for performance optimization'
-    ],
-    patterns: {
-      component: `
-export const MyComponent: React.FC<Props> = ({ data }) => {
-  const [state, setState] = useState<State>({});
-  
-  useEffect(() => {
-    // Side effects
-  }, [dependencies]);
-  
-  return <div>{content}</div>;
-};`,
-      stateManagement: 'Context API or Zustand for global state',
-      routing: 'React Router v6 with nested routes'
-    },
-    libraries: [
-      'react-router-dom - Routing',
-      'zustand - State management',
-      'react-hook-form - Form handling',
-      'react-query - Server state management'
-    ]
-  },
-  vue: {
-    // Similar structure for Vue
-  },
-  nextjs: {
-    // Similar structure for Next.js
-  }
-};
-
-export const backendMaps = {
-  nodejs: {
-    name: 'Node.js with Express',
-    description: 'JavaScript runtime for building scalable server-side applications',
-    rationale: 'JavaScript everywhere, large ecosystem, excellent for APIs',
-    bestPractices: [
-      'Use async/await for asynchronous operations',
-      'Implement proper error handling middleware',
-      'Use environment variables for configuration',
-      'Follow MVC or layered architecture'
-    ],
-    patterns: {
-      controller: `
-export const createUser = async (req: Request, res: Response) => {
-  try {
-    const user = await userService.create(req.body);
-    res.status(201).json(user);
-  } catch (error) {
-    next(error);
-  }
-};`,
-      middleware: 'Express middleware for auth, validation, error handling',
-      database: 'TypeORM or Prisma for database access'
-    }
-  },
-  django: {
-    // Similar structure for Django
-  },
-  nestjs: {
-    // Similar structure for NestJS
-  }
-};
-```
-
-#### 3. Add Interview Questions
-
-**File**: `src/data/interviewSections.ts`
-
-Add new questions for:
-- Authentication requirements (JWT, OAuth, session)
-- API design preferences (REST, GraphQL)
-- Real-time features (WebSockets, polling)
-- File handling requirements
-- Search functionality
-- Payment processing
-- Email/notification services
-
-### Deliverables
-
-- [ ] 40+ documentation files generated
-- [ ] Technology-specific content for top 5 frameworks
-- [ ] Enhanced interview with 10+ new questions
-- [ ] All files follow arc42 structure
+### 6. Documentation Viewer
+**User sees:**
+- File tree with all generated docs
+- Real-time markdown preview
+- Inline editing capability
+- Export options (JSON, Markdown ZIP, PDF)
+- Quality score and validation report
 
 ---
 
-## Phase 2: Pattern Library (Weeks 3-4)
+## Phase 1: AI Requirements Capture (Weeks 1-2)
 
 ### Goal
-Create reusable patterns for common technical implementations.
+Build the AI-powered requirements capture system that understands freeform project descriptions and expands them into comprehensive, production-ready specifications.
 
 ### Tasks
 
-#### 1. Create Pattern Library Structure
+#### 1. Create AI Integration Layer
 
-**File**: `src/data/patterns/index.ts`
+**File**: `src/services/aiService.ts`
 
 ```typescript
-export interface Pattern {
-  id: string;
-  category: 'auth' | 'api' | 'database' | 'frontend' | 'deployment';
-  name: string;
-  description: string;
-  applicableFor: {
+interface ProjectDescription {
+  rawInput: string;
+  timestamp: string;
+}
+
+interface ExpandedRequirements {
+  projectSummary: string;
+  techStack: {
     frontend?: string[];
     backend?: string[];
     database?: string[];
+    mobile?: string[];
+    deployment?: string[];
   };
-  documentation: string;
-  codeExamples: {
-    [language: string]: string;
-  };
-  relatedPatterns: string[];
+  coreFeatures: Feature[];
+  productionFeatures: Feature[];
+  inferredNeeds: {
+    category: string;
+    items: string[];
+    rationale: string;
+  }[];
+  suggestedPatterns: string[];
+  clarificationQuestions: Question[];
 }
 
-export const patterns: Pattern[] = [
-  {
-    id: 'jwt-authentication',
-    category: 'auth',
-    name: 'JWT Authentication',
-    description: 'Stateless authentication using JSON Web Tokens',
-    applicableFor: {
-      backend: ['nodejs', 'nestjs', 'django', 'fastapi'],
-      frontend: ['react', 'vue', 'angular', 'nextjs']
-    },
-    documentation: `
-# JWT Authentication Implementation
-
-## Overview
-JSON Web Tokens (JWT) provide a stateless authentication mechanism...
-
-## Implementation Steps
-1. User submits credentials
-2. Server validates and generates JWT
-3. Token sent to client (cookie or localStorage)
-4. Client includes token in subsequent requests
-5. Server validates token on each request
-
-## Security Considerations
-- Store tokens securely (httpOnly cookies recommended)
-- Implement token refresh mechanism
-- Set appropriate expiration times
-- Use strong signing algorithms (HS256 or RS256)
-
-## Code Example
-See below for implementation in your chosen stack.
-`,
-    codeExamples: {
-      'nodejs-express': `
-// Authentication middleware
-const jwt = require('jsonwebtoken');
-
-const authenticate = (req, res, next) => {
-  const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
-  
-  if (!token) {
-    return res.status(401).json({ error: 'Authentication required' });
-  }
-  
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
-  }
-};
-
-module.exports = { authenticate };
-`,
-      'react': `
-// Auth context for React
-import { createContext, useContext, useState } from 'react';
-
-interface AuthContext {
-  user: User | null;
-  login: (credentials: Credentials) => Promise<void>;
-  logout: () => void;
+interface Feature {
+  id: string;
+  name: string;
+  description: string;
+  category: 'core' | 'production' | 'optional';
+  priority: 'must-have' | 'should-have' | 'nice-to-have';
+  dependencies: string[];
+  patterns: string[];
 }
 
-const AuthContext = createContext<AuthContext>(null!);
+// AI-powered expansion service
+export const expandProjectDescription = async (
+  description: string
+): Promise<ExpandedRequirements> => {
+  const prompt = `
+You are a senior software architect and product manager. A user has described their project idea:
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  
-  const login = async (credentials: Credentials) => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials),
-      credentials: 'include', // Include cookies
-    });
-    
-    if (response.ok) {
-      const user = await response.json();
-      setUser(user);
-    }
-  };
-  
-  const logout = () => {
-    fetch('/api/auth/logout', { 
-      method: 'POST',
-      credentials: 'include' 
-    });
-    setUser(null);
-  };
-  
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+"${description}"
 
-export const useAuth = () => useContext(AuthContext);
-`
+Your task:
+1. Parse this description to extract tech stack, features, domain, and user intent.
+2. Infer production-grade needs the user may have overlooked (auth, payments, analytics, security, scaling, monitoring, CI/CD, etc.).
+3. Suggest best practices and patterns for this type of project.
+4. Generate clarification questions only if critical information is ambiguous.
+
+Return a JSON object with:
+- projectSummary: One-sentence summary
+- techStack: { frontend, backend, database, mobile, deployment }
+- coreFeatures: Array of explicitly mentioned features
+- productionFeatures: Array of inferred production needs
+- inferredNeeds: Categories of additional requirements with rationale
+- suggestedPatterns: IDs of applicable implementation patterns
+- clarificationQuestions: Array of smart follow-up questions
+
+Be comprehensive but concise. Focus on production-ready, scalable solutions.
+`;
+
+  // Call AI API (OpenAI, Anthropic, etc.)
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
     },
-    relatedPatterns: ['refresh-tokens', 'oauth-integration', 'session-management']
-  },
-  // Add more patterns...
-];
+    body: JSON.stringify({
+      model: 'gpt-4',
+      messages: [
+        { role: 'system', content: 'You are an expert software architect.' },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.7,
+      response_format: { type: 'json_object' }
+    })
+  });
+
+  const data = await response.json();
+  return JSON.parse(data.choices[0].message.content);
+};
 ```
 
-#### 2. Core Patterns to Implement
+#### 2. Build Freeform Input Component
 
-1. **Authentication Patterns**:
-   - JWT Authentication
-   - OAuth 2.0 Flow
-   - Session-Based Auth
-   - Password Reset Flow
-   - Two-Factor Authentication
-
-2. **API Patterns**:
-   - RESTful CRUD Operations
-   - Pagination
-   - Filtering and Sorting
-   - Error Response Format
-   - API Versioning
-
-3. **Database Patterns**:
-   - User Schema
-   - Relationships (One-to-Many, Many-to-Many)
-   - Soft Delete
-   - Audit Fields (created_at, updated_at)
-   - Database Migrations
-
-4. **Frontend Patterns**:
-   - Form Handling
-   - Data Fetching
-   - Loading States
-   - Error Boundaries
-   - Protected Routes
-
-5. **Deployment Patterns**:
-   - Docker Containerization
-   - Environment Variables
-   - CI/CD Pipeline
-   - Database Migrations in Production
-
-#### 3. Pattern Selection Logic
+**File**: `src/components/interview/FreeformInput.tsx`
 
 ```typescript
-// In docGenerator.ts
-import { patterns } from '../data/patterns';
+export const FreeformInput: React.FC = () => {
+  const [description, setDescription] = useState('');
+  const [isExpanding, setIsExpanding] = useState(false);
 
-const selectApplicablePatterns = (answers: Answer[]) => {
-  const frontend = getAnswer('frontend')?.selectedOptions[0];
-  const backend = getAnswer('backend')?.selectedOptions[0];
-  const authType = getAnswer('authentication')?.selectedOptions[0];
+  const examples = [
+    "A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards",
+    "A SaaS platform for freelancers to find clients with payments and messaging",
+    "An e-commerce store selling handmade crafts with inventory management",
+    "A social network for pet owners to share photos and connect locally"
+  ];
+
+  const handleSubmit = async () => {
+    setIsExpanding(true);
+    const expanded = await expandProjectDescription(description);
+    // Navigate to review screen with expanded requirements
+    onExpand(expanded);
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-4">
+        Describe Your Project
+      </h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
+        Tell us what you want to build in plain English. Our AI will expand it into 
+        a complete project specification with architecture, patterns, and documentation.
+      </p>
+
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Example: A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards"
+        className="w-full h-32 p-4 border rounded-lg"
+      />
+
+      <div className="mt-4">
+        <p className="text-sm text-gray-600 mb-2">Examples:</p>
+        {examples.map((ex, i) => (
+          <button
+            key={i}
+            onClick={() => setDescription(ex)}
+            className="text-sm text-cyan-600 hover:underline block"
+          >
+            {ex}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={handleSubmit}
+        disabled={!description.trim() || isExpanding}
+        className="mt-6 px-6 py-3 bg-cyan-500 text-white rounded-lg"
+      >
+        {isExpanding ? 'Analyzing...' : 'Expand Requirements'}
+      </button>
+    </div>
+  );
+};
+```
+
+#### 3. Create Requirements Review Screen
+
+**File**: `src/components/interview/RequirementsReview.tsx`
+
+```typescript
+interface RequirementsReviewProps {
+  expanded: ExpandedRequirements;
+  onConfirm: (refined: ExpandedRequirements) => void;
+  onEdit: (requirements: ExpandedRequirements) => void;
+}
+
+export const RequirementsReview: React.FC<RequirementsReviewProps> = ({
+  expanded,
+  onConfirm,
+  onEdit
+}) => {
+  const [requirements, setRequirements] = useState(expanded);
+  const [activeQuestion, setActiveQuestion] = useState(0);
+
+  return (
+    <div className="max-w-6xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-4">
+        Review Your Project Requirements
+      </h1>
+      
+      {/* Project Summary */}
+      <section className="mb-8 p-6 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+        <h2 className="text-xl font-semibold mb-2">Project Summary</h2>
+        <p>{requirements.projectSummary}</p>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
+        <TechStackGrid stack={requirements.techStack} onEdit={setRequirements} />
+      </section>
+
+      {/* Core Features */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
+        <FeatureList features={requirements.coreFeatures} onEdit={setRequirements} />
+      </section>
+
+      {/* Production Features */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Production Features (AI-Suggested)</h2>
+        <FeatureList features={requirements.productionFeatures} onEdit={setRequirements} />
+      </section>
+
+      {/* Clarification Questions */}
+      {requirements.clarificationQuestions.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Quick Questions</h2>
+          <ClarificationQuestions 
+            questions={requirements.clarificationQuestions}
+            onAnswer={(answers) => refineRequirements(requirements, answers)}
+          />
+        </section>
+      )}
+
+      {/* Actions */}
+      <div className="flex gap-4">
+        <button
+          onClick={() => onConfirm(requirements)}
+          className="px-6 py-3 bg-cyan-500 text-white rounded-lg"
+        >
+          Generate Documentation
+        </button>
+        <button
+          onClick={() => onEdit(requirements)}
+          className="px-6 py-3 border rounded-lg"
+        >
+          Edit Requirements
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+#### 4. Enhance Interview Data Model
+
+**File**: `src/types/requirements.ts`
+
+```typescript
+export interface ProjectRequirements {
+  // Raw user input
+  rawDescription: string;
   
-  return patterns.filter(pattern => {
-    // Check if pattern applies to chosen stack
+  // AI-expanded data
+  projectSummary: string;
+  domain: string; // e.g., "gaming", "saas", "ecommerce"
+  scale: 'mvp' | 'small' | 'medium' | 'large' | 'enterprise';
+  
+  // Tech stack
+  techStack: TechStack;
+  
+  // Features
+  coreFeatures: Feature[];
+  productionFeatures: Feature[];
+  optionalFeatures: Feature[];
+  
+  // Architecture
+  arc42Sections: Arc42Section[];
+  c4Diagrams: C4Diagram[];
+  
+  // Patterns
+  selectedPatterns: Pattern[];
+  
+  // Metadata
+  metadata: {
+    generatedAt: string;
+    aiModel: string;
+    confidence: number;
+    tags: string[];
+  };
+}
+
+export interface Arc42Section {
+  id: string;
+  number: number; // 1-12
+  title: string;
+  content: string;
+  relatedFeatures: string[];
+}
+
+export interface C4Diagram {
+  level: 'context' | 'container' | 'component' | 'code';
+  title: string;
+  diagram: string; // ASCII or Mermaid
+  description: string;
+}
+```
+
+### Deliverables
+
+- [x] 45+ documentation files already generated ✅ (Phase 1 from old roadmap complete)
+- [ ] AI integration service for requirement expansion
+- [ ] Freeform input component with voice support
+- [ ] Interactive requirements review screen
+- [ ] Smart clarification question system
+- [ ] Enhanced data model for AI-powered flow
+
+---
+
+## Phase 3: Enhanced Documentation Generation (Weeks 5-6)
+
+### Goal
+Create a comprehensive, AI-optimized pattern library with arc42+C4 compliance, rich metadata, dependency tracking, and technology-specific implementations.
+
+### Tasks
+
+#### 1. Enhanced Pattern Interface
+
+**File**: `src/data/patterns/types.ts`
+
+```typescript
+export interface Pattern {
+  // Identity
+  id: string;
+  name: string;
+  description: string;
+  category: 'auth' | 'api' | 'database' | 'frontend' | 'backend' | 'deployment' | 'integration';
+  
+  // arc42 + C4 Compliance
+  arc42Section: string; // e.g., "Building Blocks (Section 5)"
+  c4Level: 'context' | 'container' | 'component' | 'code';
+  
+  // Applicability
+  applicableFor: {
+    domains?: string[]; // e.g., ["gaming", "saas", "ecommerce"]
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    mobile?: string[];
+    scale?: ('mvp' | 'small' | 'medium' | 'large' | 'enterprise')[];
+  };
+  
+  // Dependencies & Relationships
+  dependencies: string[]; // Pattern IDs this pattern requires
+  relatedPatterns: string[]; // Pattern IDs that complement this
+  conflicts: string[]; // Pattern IDs that conflict with this
+  
+  // Metadata for AI Comprehension
+  metadata: {
+    complexity: 'simple' | 'moderate' | 'complex';
+    timeToImplement: string; // e.g., "2-4 hours"
+    expertiseRequired: 'beginner' | 'intermediate' | 'advanced';
+    productionReady: boolean;
+    tags: string[];
+  };
+  
+  // Documentation
+  documentation: string; // Full markdown documentation
+  rationale: string; // Why use this pattern
+  tradeoffs: string; // Pros and cons
+  alternatives: string[]; // Alternative pattern IDs
+  
+  // C4 Diagrams
+  diagrams: {
+    context?: string; // ASCII or Mermaid
+    container?: string;
+    component?: string;
+    code?: string;
+  };
+  
+  // Code Examples (technology-specific)
+  codeExamples: {
+    [techStack: string]: {
+      setup?: string;
+      implementation: string;
+      tests?: string;
+      deployment?: string;
+    };
+  };
+  
+  // Best Practices & Security
+  bestPractices: string[];
+  securityConsiderations: string[];
+  performanceNotes: string[];
+  
+  // Real-world Examples
+  examples: {
+    description: string;
+    company?: string; // e.g., "Used by Airbnb"
+    link?: string;
+  }[];
+}
+```
+
+#### 2. Pattern Selection Algorithm
+
+**File**: `src/utils/patternSelector.ts`
+
+```typescript
+interface SelectionContext {
+  requirements: ProjectRequirements;
+  techStack: TechStack;
+  domain: string;
+  scale: string;
+  budget?: 'low' | 'medium' | 'high';
+}
+
+export class PatternSelector {
+  private patterns: Pattern[];
+  
+  constructor(patterns: Pattern[]) {
+    this.patterns = patterns;
+  }
+  
+  /**
+   * Select applicable patterns based on project requirements
+   */
+  selectPatterns(context: SelectionContext): Pattern[] {
+    let applicable = this.patterns.filter(pattern => 
+      this.isApplicable(pattern, context)
+    );
+    
+    // Resolve dependencies
+    applicable = this.resolveDependencies(applicable);
+    
+    // Remove conflicts
+    applicable = this.resolveConflicts(applicable);
+    
+    // Sort by priority (dependencies first, then by complexity)
+    applicable = this.sortByPriority(applicable);
+    
+    return applicable;
+  }
+  
+  private isApplicable(pattern: Pattern, context: SelectionContext): boolean {
+    const { requirements, techStack, domain, scale } = context;
+    
+    // Check domain applicability
+    if (pattern.applicableFor.domains && 
+        !pattern.applicableFor.domains.includes(domain)) {
+      return false;
+    }
+    
+    // Check tech stack match
     if (pattern.applicableFor.frontend && 
-        !pattern.applicableFor.frontend.includes(frontend)) {
+        techStack.frontend && 
+        !pattern.applicableFor.frontend.includes(techStack.frontend[0])) {
       return false;
     }
     
     if (pattern.applicableFor.backend && 
-        !pattern.applicableFor.backend.includes(backend)) {
+        techStack.backend &&
+        !pattern.applicableFor.backend.includes(techStack.backend[0])) {
       return false;
     }
     
-    // Check if feature is needed
-    if (pattern.id === 'jwt-authentication' && authType !== 'jwt') {
+    // Check scale appropriateness
+    if (pattern.applicableFor.scale && 
+        !pattern.applicableFor.scale.includes(scale as any)) {
       return false;
     }
     
-    return true;
-  });
-};
-```
-
-### Deliverables
-
-- [ ] 20+ core patterns defined
-- [ ] Pattern selection logic implemented
-- [ ] Code examples for top 3 tech stacks per pattern
-- [ ] Pattern documentation integrated into generation
-
----
-
-## Phase 3: Enhancement & Validation (Weeks 5-6)
-
-### Goal
-Add validation, diagrams, and quality improvements.
-
-### Tasks
-
-#### 1. Documentation Validation
-
-**File**: `src/utils/documentationValidator.ts`
-
-```typescript
-interface ValidationResult {
-  isValid: boolean;
-  errors: ValidationError[];
-  warnings: ValidationWarning[];
-  score: number; // 0-100
+    // Check if required by features
+    const requiredByFeatures = requirements.coreFeatures.some(feature =>
+      feature.patterns.includes(pattern.id)
+    ) || requirements.productionFeatures.some(feature =>
+      feature.patterns.includes(pattern.id)
+    );
+    
+    return requiredByFeatures;
+  }
+  
+  private resolveDependencies(patterns: Pattern[]): Pattern[] {
+    const resolved = new Set<string>();
+    const result: Pattern[] = [];
+    
+    const addWithDeps = (pattern: Pattern) => {
+      if (resolved.has(pattern.id)) return;
+      
+      // Add dependencies first
+      pattern.dependencies.forEach(depId => {
+        const dep = this.patterns.find(p => p.id === depId);
+        if (dep) addWithDeps(dep);
+      });
+      
+      result.push(pattern);
+      resolved.add(pattern.id);
+    };
+    
+    patterns.forEach(addWithDeps);
+    return result;
+  }
+  
+  private resolveConflicts(patterns: Pattern[]): Pattern[] {
+    const filtered: Pattern[] = [];
+    const included = new Set<string>();
+    
+    for (const pattern of patterns) {
+      const hasConflict = pattern.conflicts.some(c => included.has(c));
+      if (!hasConflict) {
+        filtered.push(pattern);
+        included.add(pattern.id);
+      }
+    }
+    
+    return filtered;
+  }
+  
+  private sortByPriority(patterns: Pattern[]): Pattern[] {
+    return patterns.sort((a, b) => {
+      // Dependencies first
+      if (b.dependencies.includes(a.id)) return -1;
+      if (a.dependencies.includes(b.id)) return 1;
+      
+      // Then by complexity (simple first)
+      const complexityOrder = { simple: 0, moderate: 1, complex: 2 };
+      return complexityOrder[a.metadata.complexity] - 
+             complexityOrder[b.metadata.complexity];
+    });
+  }
 }
-
-export const validateDocumentation = (
-  docs: { [path: string]: string }
-): ValidationResult => {
-  const errors: ValidationError[] = [];
-  const warnings: ValidationWarning[] = [];
-  
-  // Check completeness
-  const requiredFiles = [
-    '/project/overview.md',
-    '/architecture/tech-stack.md',
-    '/api/endpoints.md',
-    // ... more required files
-  ];
-  
-  requiredFiles.forEach(file => {
-    if (!docs[file]) {
-      errors.push({
-        type: 'missing-file',
-        file,
-        message: `Required file ${file} is missing`
-      });
-    }
-  });
-  
-  // Check content quality
-  Object.entries(docs).forEach(([path, content]) => {
-    // Check for headings
-    if (!content.includes('# ')) {
-      warnings.push({
-        type: 'missing-heading',
-        file: path,
-        message: 'Document should have at least one H1 heading'
-      });
-    }
-    
-    // Check for code examples where appropriate
-    if (path.includes('/api/') || path.includes('/frontend/') || path.includes('/backend/')) {
-      if (!content.includes('```')) {
-        warnings.push({
-          type: 'missing-code-example',
-          file: path,
-          message: 'Technical documentation should include code examples'
-        });
-      }
-    }
-    
-    // Check for internal links validity
-    const linkMatches = content.matchAll(/\[.*?\]\((\/.*?\.md)\)/g);
-    for (const match of linkMatches) {
-      const linkedFile = match[1];
-      if (!docs[linkedFile]) {
-        errors.push({
-          type: 'broken-link',
-          file: path,
-          message: `Link to ${linkedFile} is broken`
-        });
-      }
-    }
-  });
-  
-  // Calculate score
-  const maxScore = 100;
-  const errorDeduction = errors.length * 10;
-  const warningDeduction = warnings.length * 2;
-  const score = Math.max(0, maxScore - errorDeduction - warningDeduction);
-  
-  return {
-    isValid: errors.length === 0,
-    errors,
-    warnings,
-    score
-  };
-};
 ```
 
-#### 2. Add C4 Diagram Generation (Text-Based)
+#### 3. Core Patterns Library
 
-**File**: `src/utils/diagramGenerator.ts`
+**File**: `src/data/patterns/index.ts`
 
-```typescript
-export const generateC4ContextDiagram = (answers: Answer[], projectName: string) => {
-  const users = getAnswer('target-users')?.selectedOptions || [];
-  const integrations = getAnswer('integrations')?.selectedOptions || [];
-  
-  return `
-# System Context Diagram (C4 - Level 1)
+**Create 30+ production-ready patterns across categories:**
 
-\`\`\`
-┌─────────────────────────────────────────────────────────┐
-│                                                         │
-│              ${projectName} System Context              │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
+**Authentication Patterns** (5 patterns):
+- JWT Authentication (with refresh tokens)
+- OAuth 2.0 Integration (Google, Apple, GitHub)
+- Session-Based Authentication
+- Password Reset Flow
+- Two-Factor Authentication (TOTP, SMS)
 
-┌─────────────┐
-│   Actors    │
-└─────────────┘
-${users.map(u => `- ${u}`).join('\n')}
+**API Patterns** (7 patterns):
+- RESTful CRUD Operations
+- GraphQL Schema Design
+- API Pagination (offset, cursor-based)
+- Filtering & Sorting
+- Rate Limiting & Throttling
+- API Versioning (URL, header, content negotiation)
+- Webhook Implementation
 
-┌──────────────────┐
-│  ${projectName}   │  ← Your System
-└──────────────────┘
+**Database Patterns** (6 patterns):
+- User Schema (with roles & permissions)
+- One-to-Many Relationships
+- Many-to-Many Relationships
+- Soft Delete Pattern
+- Audit Fields (created_at, updated_at, deleted_at)
+- Database Migrations & Versioning
 
-┌─────────────────────┐
-│ External Systems    │
-└─────────────────────┘
-${integrations.map(i => `- ${i}`).join('\n')}
+**Frontend Patterns** (8 patterns):
+- Form Handling & Validation
+- Data Fetching & Caching (React Query, SWR)
+- Loading & Error States
+- Optimistic Updates
+- Protected Routes & Authorization
+- Infinite Scroll / Virtual Lists
+- File Upload with Progress
+- Real-time Updates (WebSocket, SSE)
 
-Interactions:
-${users.map(u => `${u} → Uses → ${projectName}`).join('\n')}
-${integrations.map(i => `${projectName} → Integrates with → ${i}`).join('\n')}
-\`\`\`
+**Backend Patterns** (6 patterns):
+- Middleware Architecture
+- Error Handling & Logging
+- Background Jobs (queues, cron)
+- Caching Strategy (Redis, in-memory)
+- File Storage (S3, local, CDN)
+- Email Service Integration
 
-## Description
+**Mobile Patterns** (4 patterns):
+- Flutter State Management (Provider, Riverpod, Bloc)
+- Offline-First Architecture
+- Push Notifications (FCM, APNs)
+- Deep Linking & Navigation
 
-This diagram shows ${projectName} in its environment. Users interact with
-the system, and the system integrates with external services as needed.
-`;
-};
+**Deployment Patterns** (6 patterns):
+- Docker Containerization
+- CI/CD Pipeline (GitHub Actions, GitLab CI)
+- Environment Variables & Secrets
+- Database Migration in Production
+- Zero-Downtime Deployment
+- Monitoring & Alerting
 
-export const generateC4ContainerDiagram = (answers: Answer[], projectName: string) => {
-  const frontend = getAnswer('frontend')?.selectedOptions[0];
-  const backend = getAnswer('backend')?.selectedOptions[0];
-  const database = getAnswer('database')?.selectedOptions[0];
-  
-  return `
-# Container Diagram (C4 - Level 2)
+**Gaming-Specific Patterns** (4 patterns):
+- Leaderboard Implementation (global, friends, time-based)
+- Achievement System
+- In-App Purchases & Subscriptions
+- Game State Synchronization
 
-\`\`\`
-┌────────────────────────────────────────────────────────┐
-│                                                        │
-│           ${projectName} Container View                │
-│                                                        │
-└────────────────────────────────────────────────────────┘
+#### 4. Pattern Documentation Template
 
-┌──────────────┐        ┌──────────────┐        ┌──────────────┐
-│   Frontend   │ ────→  │   Backend    │ ────→  │   Database   │
-│   (${frontend})│        │  (${backend}) │        │  (${database})│
-└──────────────┘        └──────────────┘        └──────────────┘
-     │                       │
-     │                       │
-     ↓                       ↓
-[Web Browser]          [API Clients]
-\`\`\`
+Each pattern includes:
 
-## Containers
+```markdown
+---
+patternId: jwt-authentication
+arc42Section: Building Blocks (Section 5)
+c4Level: Container
+domain: [saas, gaming, ecommerce, marketplace]
+techStack:
+  backend: [nodejs, django, nestjs, fastapi]
+  frontend: [react, vue, nextjs, flutter]
+dependencies:
+  - error-handling
+  - environment-config
+relatedPatterns:
+  - refresh-token-rotation
+  - oauth-integration
+complexity: moderate
+timeToImplement: 3-5 hours
+productionReady: true
+---
 
-### Frontend Application (${frontend})
-- Delivers the user interface
-- Runs in the user's web browser
-- Makes API calls to backend
+# JWT Authentication (arc42 Section 5, C4: Container)
 
-### Backend Application (${backend})
-- Implements business logic
-- Provides REST API
-- Handles authentication and authorization
+## Overview
+Stateless authentication using JSON Web Tokens for secure, scalable user sessions.
 
-### Database (${database})
-- Stores application data
-- Handles data persistence
-- Supports querying and reporting
-`;
-};
+## Rationale
+- **Stateless**: No server-side session storage required
+- **Scalable**: Works across multiple servers without shared state
+- **Standard**: Industry-standard approach (RFC 7519)
+- **Mobile-Friendly**: Easy token storage and transmission
+
+## C4 Container Diagram
+```mermaid
+graph LR
+  Client[Client App] -->|1. POST /login| API[API Server]
+  API -->|2. Validate| DB[(Database)]
+  API -->|3. Generate JWT| API
+  API -->|4. Return token| Client
+  Client -->|5. Authorization: Bearer token| API
+  API -->|6. Verify JWT| API
 ```
 
-#### 3. Add Metadata Generation
+## Implementation
 
-```typescript
-export const generateDocumentationMetadata = (
-  answers: Answer[],
-  projectName: string
-) => {
-  return {
-    project: {
-      name: projectName,
-      generatedAt: new Date().toISOString(),
-      version: '1.0.0'
-    },
-    technology: {
-      frontend: getAnswer('frontend')?.selectedOptions[0],
-      backend: getAnswer('backend')?.selectedOptions[0],
-      database: getAnswer('database')?.selectedOptions[0]
-    },
-    features: {
-      authentication: getAnswer('authentication')?.selectedOptions || [],
-      payments: getAnswer('payments')?.selectedOptions[0],
-      realtime: getAnswer('realtime')?.selectedOptions[0]
-    },
-    documentation: {
-      framework: 'arc42',
-      visualModel: 'C4',
-      totalFiles: 40, // Update based on actual count
-      categories: 12
-    }
-  };
-};
+### Node.js + Express
+[Full code example with middleware, login route, token generation]
+
+### Flutter (Client)
+[Full code example with auth provider, token storage, API client]
+
+## Security Considerations
+- Store tokens in httpOnly cookies (web) or secure storage (mobile)
+- Use short expiration times (15 min for access, 7 days for refresh)
+- Implement refresh token rotation
+- Use RS256 for production (asymmetric signing)
+
+## Best Practices
+[List of 5-7 best practices]
+
+## Related Patterns
+- [Refresh Token Rotation](./refresh-token-rotation.md)
+- [OAuth 2.0 Integration](./oauth-integration.md)
 ```
 
 ### Deliverables
 
-- [ ] Validation engine for generated docs
-- [ ] C4 diagrams (Context and Container levels)
-- [ ] Metadata generation
-- [ ] Quality score for documentation
+- [ ] 30+ production-ready patterns with full documentation
+- [ ] Pattern selection algorithm with dependency resolution
+- [ ] Technology-specific code examples for top 5 stacks
+- [ ] arc42+C4 diagrams for each pattern
+- [ ] Metadata blocks for AI comprehension
 
 ---
 
-## Success Criteria
-
-### Documentation Quality
-- ✅ 40+ files generated covering all aspects
-- ✅ Each file has clear structure with headings
-- ✅ Code examples match chosen tech stack
-- ✅ All internal links are valid
-- ✅ Follows arc42 structure
-- ✅ Includes C4 diagrams
-
-### AI Optimization
-- ✅ Each section is self-contained
-- ✅ Metadata included in all files
-- ✅ FAQs added where appropriate
-- ✅ Clear, verbose explanations
-- ✅ Cross-references between files
-
-### User Experience
-- ✅ Generation completes in < 5 seconds
-- ✅ Preview updates in real-time
-- ✅ Export works for all formats
-- ✅ Documentation is readable and actionable
-
----
-
-## Testing Plan
-
-### Unit Tests
-- Test each documentation generator function
-- Validate pattern selection logic
-- Test validation engine rules
-
-### Integration Tests
-- Full interview → documentation flow
-- Pattern application for different stacks
-- Export to all formats
-
-### AI Testing
-- Feed generated docs to GitHub Copilot
-- Feed generated docs to ChatGPT/Claude
-- Measure AI's ability to:
-  - Answer questions about the project
-  - Generate code matching specifications
-  - Understand architecture decisions
-  - Follow security guidelines
-
----
-
-## Resources Needed
-
-### Development
-- 2-3 developers
-- 6 weeks development time
-- Access to GitHub API (for future pattern extraction)
-
-### Content
-- Technical writers for pattern documentation
-- Example code reviewers
-- AI testing volunteers
-
-### Tools
-- Current tech stack (React, TypeScript, Vite)
-- No additional dependencies required for Phase 1-3
-
----
-
-## Risks and Mitigations
-
-### Risk 1: Content Generation Quality
-**Mitigation**: Implement validation engine and manual review process
-
-### Risk 2: Pattern Library Completeness
-**Mitigation**: Start with core patterns, expand iteratively based on feedback
-
-### Risk 3: AI Comprehension Issues
-**Mitigation**: Test with multiple AI assistants, iterate based on results
-
-### Risk 4: Maintenance Overhead
-**Mitigation**: Use templates and patterns for consistency, automate validation
-
----
-
-## Next Steps
-
-1. **Review this roadmap** with the team
-2. **Prioritize Phase 1 tasks** and assign owners
-3. **Set up project tracking** (GitHub Projects or similar)
-4. **Begin implementation** starting with docGenerator expansion
-5. **Establish testing protocol** for AI comprehension
-
----
-
-**Status**: Ready to begin  
-**Start Date**: [To be determined]  
-**Estimated Completion**: 6 weeks from start  
-**Owner**: Development Team

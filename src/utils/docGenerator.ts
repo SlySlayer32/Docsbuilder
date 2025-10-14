@@ -5,6 +5,10 @@ export const generateDocumentation = (answers: Answer[], projectName: string) =>
   const docs: { [path: string]: string } = {};
 
   const getAnswer = (questionId: string) => answers.find(a => a.questionId === questionId);
+  
+  console.log('🔍 [docGenerator] Starting documentation generation...');
+  console.log('📝 [docGenerator] Project name:', projectName);
+  console.log('📊 [docGenerator] Total answers received:', answers.length);
 
   // Project Overview
   const purposeAnswer = getAnswer('purpose');
@@ -2923,5 +2927,10 @@ ${backendTech === 'nodejs' ? `- Use \`console.log\` or debugger
 3. Ask team members
 4. Create detailed issue report`;
 
+  const fileCount = Object.keys(docs).length;
+  console.log('✅ [docGenerator] Documentation generation complete!');
+  console.log('📁 [docGenerator] Total files generated:', fileCount);
+  console.log('📂 [docGenerator] Files:', Object.keys(docs).sort());
+  
   return docs;
 };
