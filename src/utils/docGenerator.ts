@@ -1,22 +1,10 @@
-import { Answer } from '../types/interview';
+import { Answer, SelectionOption } from '../types/interview';
 import { frontendMaps, backendMaps, databaseMaps } from '../data/technologyMaps';
 
 export const generateDocumentation = (answers: Answer[], projectName: string) => {
   const docs: { [path: string]: string } = {};
 
   const getAnswer = (questionId: string) => answers.find(a => a.questionId === questionId);
-  const getOptionLabels = (questionId: string, options: SelectionOption[]) => {
-    const answer = getAnswer(questionId);
-    if (!answer) return [];
-    return answer.selectedOptions.map(id => options.find(o => o.id === id)?.label || id);
-  };
-
-  interface SelectionOption {
-    id: string;
-    label: string;
-    icon?: string;
-    description?: string;
-  }
 
   // Project Overview
   const purposeAnswer = getAnswer('purpose');
@@ -368,10 +356,12 @@ ${frontendMap?.patterns.routing || 'Client-side routing'}
 
 ## External Components
 
-${getAnswer('payments')?.selectedOptions[0] !== 'no' ? '- **Payment Gateway**: Process payments' : ''}
-${getAnswer('file-storage')?.selectedOptions[0] !== 'no' ? '- **File Storage**: Store uploaded files' : ''}
-${getAnswer('email-service')?.selectedOptions.length > 0 && !getAnswer('email-service')?.selectedOptions.includes('no') ? '- **Email Service**: Send notifications' : ''}
-${getAnswer('search')?.selectedOptions[0] !== 'no' ? '- **Search Engine**: Full-text search' : ''}`;
+${[
+  getAnswer('payments')?.selectedOptions[0] !== 'no' ? '- **Payment Gateway**: Process payments' : null,
+  getAnswer('file-storage')?.selectedOptions[0] !== 'no' && getAnswer('file-storage')?.selectedOptions[0] !== 'local' ? '- **File Storage**: Store uploaded files' : null,
+  getAnswer('email-service')?.selectedOptions.length > 0 && !getAnswer('email-service')?.selectedOptions.includes('no') ? '- **Email Service**: Send notifications' : null,
+  getAnswer('search')?.selectedOptions[0] !== 'no' && getAnswer('search')?.selectedOptions[0] !== 'database' ? '- **Search Engine**: Full-text search' : null
+].filter(Boolean).join('\n') || '- No external components required for MVP'}`;
 
   docs['/architecture/runtime-view.md'] = `# Runtime View
 
@@ -1262,8 +1252,8 @@ Controllers → Services → Repositories → Database
 
 ### Example Service
 
-${backendMap?.patterns.controller || `\`\`\`
-class UserService {
+\`\`\`${backendTech === 'python' ? 'python' : 'typescript'}
+${backendTech === 'nodejs' ? `class UserService {
   async createUser(data: CreateUserDTO) {
     // Validate business rules
     await this.validateUniqueEmail(data.email);
@@ -1282,8 +1272,32 @@ class UserService {
     
     return user;
   }
-}
-\`\`\``}
+}` : backendTech === 'python' ? `class UserService:
+    async def create_user(self, data: CreateUserDTO) -> User:
+        # Validate business rules
+        await self.validate_unique_email(data.email)
+        
+        # Hash password
+        hashed_password = hash_password(data.password)
+        
+        # Create user
+        user = await self.user_repository.create(
+            **data.dict(),
+            password=hashed_password
+        )
+        
+        # Send welcome email
+        await self.email_service.send_welcome(user)
+        
+        return user` : `// Service implementation based on ${backendTech}
+class UserService {
+  async createUser(data: CreateUserDTO) {
+    // Validate and process user creation
+    const user = await this.userRepository.create(data);
+    return user;
+  }
+}`}
+\`\`\`
 
 ## Business Rules
 

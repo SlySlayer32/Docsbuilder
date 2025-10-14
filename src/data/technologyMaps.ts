@@ -161,10 +161,16 @@ export const backendMaps: { [key: string]: TechnologyMap } = {
       'Follow PEP 8 style guide',
     ],
     patterns: {
-      controller: `@router.post("/users/")
-async def create_user(user: UserCreate):
-    db_user = await user_service.create(user)
-    return db_user`,
+      controller: `@router.post("/users/", response_model=UserResponse)
+async def create_user(user: UserCreate) -> UserResponse:
+    try:
+        db_user = await user_service.create(user)
+        return db_user
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error creating user: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")`,
       middleware: 'Middleware for auth, CORS, and validation',
       database: 'Django ORM or SQLAlchemy',
     },
