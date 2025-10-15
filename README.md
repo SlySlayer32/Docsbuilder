@@ -1,8 +1,8 @@
 # Docsbuilder 🚀
 
-> **"Describe your project in plain English, and AI generates complete, production-ready documentation."**
+> **"Select components, get instant documentation. No AI needed, just production-ready templates."**
 
-Transform project ideas into comprehensive, AI-optimized documentation with arc42+C4 architecture diagrams and code patterns.
+Transform project ideas into comprehensive documentation by selecting pre-built components and combining them into complete, production-ready documentation.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react)](https://react.dev/)
@@ -11,54 +11,70 @@ Transform project ideas into comprehensive, AI-optimized documentation with arc4
 
 ## 🎯 What Makes Docsbuilder Different
 
-Instead of clicking through questionnaires, just **type one sentence**:
+**The New Approach**: Visual component selection instead of complex questionnaires.
 
+### Select Components Like Building Blocks:
 ```
-"A mobile Flutter Pacman-style game with user login, subscriptions, and leaderboards"
+✅ Basic Login/Signup
+✅ User Dashboard
+✅ CRUD Operations
+✅ Stripe Integration
+✅ REST API
 ```
 
-**AI expands this into:**
-- ✅ 45+ production-ready documentation files
+**Instantly generates:**
+- ✅ 40+ production-ready documentation files
 - ✅ arc42 architecture documentation
-- ✅ C4 model diagrams (Context, Container, Component)
-- ✅ 15+ code patterns (technology-specific)
-- ✅ Rich metadata for AI tools (GitHub Copilot, ChatGPT)
+- ✅ Technology-specific code examples
+- ✅ API endpoint specifications
+- ✅ Security best practices
+- ✅ Testing strategies
 
-**⏱️ Time: 2 minutes total** (5 seconds to describe, 10 seconds AI expansion, 1 minute review, 5 seconds generation)
+**⏱️ Time: 2 minutes total** (30 seconds to select components, 5 seconds generation, 1 minute review)
+
+**🆓 No AI Costs** - 100% free, works offline, consistent results
 
 ---
 
 ## 🚀 Overview
 
-**Docsbuilder** is the first AI-powered documentation generator that understands your project idea and creates complete, production-ready documentation optimized for:
-- 🤖 **AI-Assisted Development** - GitHub Copilot, ChatGPT, Claude
-- � **Project Planning** - arc42 + C4 compliant specifications
-- �👥 **Stakeholder Communication** - Clear, comprehensive project documentation
-- ⚡ **Rapid Prototyping** - From idea to architecture in minutes
+**Docsbuilder** is a modular documentation generator that creates complete, production-ready documentation through visual component selection. It's optimized for:
+- 🧩 **Component-Based Architecture** - Select pre-built components like LEGO blocks
+- 📋 **Project Planning** - arc42 compliant documentation structure
+- 👥 **Stakeholder Communication** - Clear, comprehensive project documentation
+- ⚡ **Rapid Development** - Instant generation with zero AI costs
+- 🤖 **AI-Friendly Output** - Perfect for GitHub Copilot, ChatGPT, Claude
 
 ---
 
 ## ✨ Key Features
 
 ### Current (Phase 1 - ✅ Complete)
-- **📝 45+ Documentation Files** - Comprehensive coverage of all project aspects
+- **🧩 Component Selection** - Visual selection of 5 core boilerplate components
+- **📝 40+ Documentation Files** - Comprehensive coverage based on selected components
 - **🏗️ arc42 Structure** - Industry-standard architecture documentation
 - **🎨 Modern UI** - Beautiful interface with dark mode support
 - **✏️ Live Editor** - Edit and refine docs with real-time markdown preview
 - **📦 Multiple Export Options** - JSON, Markdown, ZIP
 - **⚙️ Technology Maps** - Framework-specific best practices and patterns
+- **⚡ Instant Generation** - No AI needed, < 5 second generation time
 
-### Coming Soon (Phase 2-3 - ⏳ In Progress)
-- **� Freeform Input** - Describe projects in plain English
-- **🤖 AI Expansion** - GPT-4/Claude intelligently expands requirements
-- **🧠 Smart Clarification** - AI asks only essential follow-up questions
-- **🎨 C4 Diagrams** - Auto-generated Context, Container, and Component diagrams
-- **📚 Pattern Library** - 30+ production-ready code patterns
-- **🔗 Pattern Injection** - Technology-specific code examples in documentation
-- **🎯 Metadata Blocks** - Rich metadata for optimal AI comprehension
+### Core Components Available
+1. **Basic Login/Signup** - Authentication with email/password, social login
+2. **User Dashboard** - User profile, settings, navigation
+3. **CRUD Operations** - Create, Read, Update, Delete patterns
+4. **Stripe Integration** - Payment processing and subscriptions
+5. **REST API** - RESTful API endpoint templates
 
-👉 **See the full vision**: [AI Vision Document](./AI-VISION.md)  
-👉 **Implementation details**: [AI-Powered Roadmap](./docs/research/AI-POWERED-ROADMAP.md)
+### Coming Soon (Phase 2+)
+- **📚 Expanded Library** - 60+ components across 14 categories
+- **🔗 Smart Dependencies** - Auto-resolve component dependencies
+- **⚠️ Conflict Detection** - Warn about incompatible component combinations
+- **🎨 C4 Diagrams** - Visual architecture diagrams
+- **💾 Project Saving** - Save and load projects with Supabase
+- **🤝 Collaboration** - Share projects with team members
+
+👉 **See the approach**: [Boilerplate Approach Document](./BOILERPLATE-APPROACH.md)
 
 ## 📸 Screenshots
 
