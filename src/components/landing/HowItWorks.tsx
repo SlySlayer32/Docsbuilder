@@ -3,23 +3,23 @@ import React from 'react';
 const steps = [
   {
     number: '1',
-    title: 'Choose Template',
-    description: 'Select from pre-built templates or start from scratch',
+    title: 'Select Tech Stack',
+    description: 'Choose your frontend, backend, and database technologies',
   },
   {
     number: '2',
-    title: 'Answer Questions',
-    description: 'Complete the interactive interview with selection cards',
+    title: 'Pick Components',
+    description: 'Select from 5+ production-ready boilerplate components',
   },
   {
     number: '3',
-    title: 'Review & Edit',
-    description: 'Refine generated documentation with built-in editor',
+    title: 'Generate Instantly',
+    description: '40+ documentation files generated in seconds',
   },
   {
     number: '4',
     title: 'Export & Build',
-    description: 'Download docs and use as context for AI development',
+    description: 'Download docs and start developing immediately',
   },
 ];
 

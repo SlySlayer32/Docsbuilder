@@ -124,6 +124,9 @@ ${endpoint.response ? `**Response**:\n\`\`\`json\n${endpoint.response}\n\`\`\`` 
 
   // Technical Architecture Summary
   // Create compatibility objects for old template references
+  const frontendTech = techStack.frontend;
+  const backendTech = techStack.backend;
+  const databaseTech = techStack.database;
   const frontendAnswer = { selectedOptions: [techStack.frontend] };
   const backendAnswer = { selectedOptions: [techStack.backend] };
   const databaseAnswer = { selectedOptions: [techStack.database] };
