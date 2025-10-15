@@ -1,6 +1,14 @@
-import { TechStack } from '../types/components';
+import { TechStack, BoilerplateComponent } from '../types/components';
 import { getComponentById } from '../data/boilerplateComponents';
 import { frontendMaps, backendMaps, databaseMaps } from '../data/technologyMaps';
+import { 
+  generateReadme, 
+  generateSetup, 
+  generateTroubleshooting, 
+  generateFAQ, 
+  generateArchitecture,
+  generateEnvExample 
+} from './userFriendlyDocGenerator';
 
 export const generateDocumentation = (
   componentIds: string[],
@@ -12,7 +20,7 @@ export const generateDocumentation = (
   // Get selected components
   const selectedComponents = componentIds
     .map(id => getComponentById(id))
-    .filter(Boolean);
+    .filter(Boolean) as BoilerplateComponent[];
   
   console.log('🔍 [docGenerator] Starting documentation generation...');
   console.log('📝 [docGenerator] Project name:', projectName);
@@ -23,6 +31,16 @@ export const generateDocumentation = (
   const frontendMap = frontendMaps[techStack.frontend];
   const backendMap = backendMaps[techStack.backend];
   const databaseMap = databaseMaps[techStack.database];
+
+  // Generate user-friendly core documentation files
+  const docOptions = { projectName, techStack, selectedComponents };
+  
+  docs['/README.md'] = generateReadme(docOptions);
+  docs['/SETUP.md'] = generateSetup(docOptions);
+  docs['/TROUBLESHOOTING.md'] = generateTroubleshooting(docOptions);
+  docs['/FAQ.md'] = generateFAQ(docOptions);
+  docs['/ARCHITECTURE.md'] = generateArchitecture(docOptions);
+  docs['/.env.example'] = generateEnvExample(docOptions);
 
   // Project Overview
   const componentList = selectedComponents.map(c => `- **${c!.name}**: ${c!.description}`).join('\n');
