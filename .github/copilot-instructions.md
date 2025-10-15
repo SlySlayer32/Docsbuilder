@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-**Docsbuilder** is a React + TypeScript application that generates comprehensive project documentation through an interactive interview process. It creates AI-ready documentation optimized for development tools like GitHub Copilot.
+**Docsbuilder** is a React + TypeScript application that generates comprehensive project documentation through a modular boilerplate component selection system. Users select pre-built components and combine them to create complete, production-ready documentation instantly.
 
 ### Core Purpose
-- Transform project ideas into structured documentation
-- Generate 40+ markdown files covering all aspects of a project
+- Transform project requirements into structured documentation through component selection
+- Generate 40+ markdown files by combining pre-written component templates
 - Provide AI-optimized documentation format for development assistance
-- Enable rapid specification through smart selection-based interviews
+- Enable rapid specification through visual component selection (no AI needed)
 
 ## Tech Stack
 
@@ -34,7 +34,7 @@
 1. **Landing Page** → User introduction and CTA
 2. **Authentication** → Mock authentication (future Supabase integration)
 3. **Dashboard** → Project management and templates
-4. **Interview Flow** → Multi-step questionnaire
+4. **Component Selection** → Visual selection of boilerplate components
 5. **Documentation Viewer** → Generated docs with file tree and preview
 
 ### Directory Structure
@@ -42,19 +42,21 @@
 src/
 ├── components/          # React components
 │   ├── auth/           # Authentication components
+│   ├── boilerplate/    # Component selection UI (NEW)
 │   ├── common/         # Shared components (Navbar, DarkMode)
 │   ├── dashboard/      # Dashboard-specific components
 │   ├── docs/           # Documentation viewer components
-│   ├── interview/      # Interview flow components
 │   ├── landing/        # Landing page sections
 │   ├── templates/      # Template selection components
 │   └── ui/             # shadcn/ui components
 ├── contexts/           # React Context providers
-├── data/               # Static data (interview questions)
+├── data/               # Static data (component definitions)
+│   └── boilerplateComponents.ts  # Component library (NEW)
 ├── hooks/              # Custom React hooks
 ├── lib/                # Utility functions
 ├── pages/              # Page-level components
 ├── types/              # TypeScript type definitions
+│   └── components.ts   # Component types (NEW)
 └── utils/              # Helper utilities (doc generator)
 ```
 
@@ -96,33 +98,43 @@ export const MyComponent: React.FC<MyComponentProps> = ({ data, onAction }) => {
 
 ## Core Features
 
-### 1. Interview System
-**Location**: `src/components/interview/`
-- Multi-section questionnaire with progress tracking
-- Selection-based questions (single/multiple choice)
-- Optional detail fields for additional context
-- Real-time answer validation
+### 1. Component Selection System
+**Location**: `src/components/boilerplate/`
+- Visual selection of pre-built components
+- Categorized by functionality (Auth, Dashboard, Payments, etc.)
+- Tech stack selector for customization
+- Real-time selection summary
 
 **Key Components**:
-- `InterviewFlow.tsx` - Main orchestrator
-- `QuestionStep.tsx` - Individual question rendering
-- `SelectionCard.tsx` - Option selection UI
-- `ProgressBar.tsx` - Visual progress indicator
+- `ComponentSelector.tsx` - Main selection interface
+- `ComponentCard.tsx` - Individual component card with checkbox
+- `CategorySection.tsx` - Category grouping UI
+- `SelectionSummary.tsx` - Shows selected components count
+- `TechStackSelector.tsx` - Tech stack selection
+
+**Core Components Available** (Phase 1 - 5 Components):
+1. **Basic Login/Signup** - Authentication component
+2. **User Dashboard** - Dashboard component
+3. **CRUD Operations** - Data management component
+4. **Stripe Integration** - Payment processing
+5. **REST API** - API endpoint templates
 
 ### 2. Documentation Generation
 **Location**: `src/utils/docGenerator.ts`
-- Generates markdown files based on interview answers
-- Creates structured documentation hierarchy
-- Outputs 5+ core documentation files
-- Includes: overview, tech stack, authentication, requirements
+- Combines pre-written component documentation templates
+- Applies tech stack customization to templates
+- Handles component dependencies and conflicts
+- Generates 40+ files from selected components
 
-**Generated Structure**:
+**Input**: 
+```typescript
+{
+  selectedComponents: string[];  // Component IDs
+  techStack: TechStack;          // Frontend, backend, database choices
+}
 ```
-/project/overview.md
-/project/requirements.md
-/architecture/tech-stack.md
-/security/authentication.md
-```
+
+**Output**: Complete documentation with 40+ markdown files
 
 ### 3. Documentation Viewer
 **Location**: `src/components/docs/`
@@ -137,36 +149,37 @@ export const MyComponent: React.FC<MyComponentProps> = ({ data, onAction }) => {
 - `MarkdownPreview.tsx` - Markdown rendering
 - `ExportOptions.tsx` - Export modal
 
-### 4. Template System
-**Location**: `src/components/templates/`
-- Pre-configured project templates
-- Quick-start options for common project types
-- Template categories: SaaS, Marketplace, E-commerce, etc.
-
 ## Data Models
 
-### Interview Types
+### Component Types
 ```typescript
-interface Question {
+interface BoilerplateComponent {
   id: string;
-  title: string;
-  description?: string;
-  type: 'single' | 'multiple';
-  options: SelectionOption[];
-  allowDetails?: boolean;
-}
-
-interface Answer {
-  questionId: string;
-  selectedOptions: string[];
-  details?: string;
-}
-
-interface Section {
-  id: string;
-  title: string;
+  name: string;
+  category: ComponentCategory;
+  description: string;
   icon: string;
-  questions: Question[];
+  documentation: ComponentDocumentation;
+  dependencies: string[];          // Required component IDs
+  recommendedWith: string[];       // Suggested component IDs
+  conflicts: string[];             // Conflicting component IDs
+  complexity: 'beginner' | 'intermediate' | 'advanced';
+  estimatedHours: number;
+}
+
+type ComponentCategory = 
+  | 'authentication' 
+  | 'dashboard' 
+  | 'data-management' 
+  | 'payments' 
+  | 'api' 
+  | 'communication' 
+  | 'content';
+
+interface TechStack {
+  frontend: string;   // 'react' | 'vue' | 'nextjs' | 'svelte'
+  backend: string;    // 'nodejs' | 'python' | 'go' | 'firebase'
+  database: string;   // 'postgresql' | 'mongodb' | 'mysql' | 'supabase'
 }
 ```
 
@@ -176,7 +189,8 @@ interface Section {
 // Example:
 {
   '/project/overview.md': '# Project\n\n## Overview\n...',
-  '/architecture/tech-stack.md': '# Tech Stack\n...'
+  '/architecture/tech-stack.md': '# Tech Stack\n...',
+  '/components/authentication.md': '# Authentication\n...'
 }
 ```
 
@@ -192,10 +206,11 @@ interface Section {
 
 ### When Modifying Documentation Generator
 1. **Location**: `src/utils/docGenerator.ts`
-2. **Pattern**: Map answers to markdown content
+2. **Pattern**: Combine component templates based on selections
 3. **Structure**: Use hierarchical paths (e.g., `/section/file.md`)
 4. **Content**: Include detailed, actionable information
 5. **AI-Friendly**: Use clear headings and structured content
+6. **Tech Stack**: Apply technology-specific code examples from templates
 
 ### When Adding UI Components
 1. **Use shadcn/ui** - Check if component exists in `src/components/ui/`
@@ -206,19 +221,19 @@ interface Section {
 
 ## Common Tasks
 
-### Adding a New Interview Question
-1. Open `src/data/interviewSections.ts`
-2. Add question to appropriate section
-3. Define options with labels and optional icons
-4. Set `type: 'single' | 'multiple'`
-5. Set `allowDetails: true` if text input needed
+### Adding a New Component to Library
+1. Open `src/data/boilerplateComponents.ts`
+2. Add component definition with complete metadata
+3. Create documentation templates for multiple tech stacks
+4. Define dependencies, conflicts, and recommendations
+5. Add to appropriate category
 
 ### Extending Documentation Generator
 1. Open `src/utils/docGenerator.ts`
-2. Get answer using `getAnswer(questionId)`
-3. Add new path and markdown content to `docs` object
-4. Use template literals for dynamic content
-5. Follow markdown best practices
+2. Access selected components via parameter
+3. Combine component templates into documentation
+4. Apply tech stack customization to code examples
+5. Handle component dependencies and conflicts
 
 ### Creating a New Page
 1. Create component in `src/pages/`
@@ -267,12 +282,13 @@ interface Section {
 ## Future Enhancements
 
 ### Planned Features
+- Expand component library (60+ components across 14 categories)
 - Supabase authentication and data persistence
 - Project saving and loading
 - Collaboration features
 - Advanced export options (PDF, HTML)
-- Custom templates
-- AI-powered documentation suggestions
+- Custom component creation
+- Component dependency auto-resolution
 
 ### Integration Points
 - **Backend**: Currently mock, ready for Supabase
@@ -284,9 +300,10 @@ interface Section {
 ### Critical Files to Understand
 1. `src/components/AppLayout.tsx` - Main app orchestrator
 2. `src/utils/docGenerator.ts` - Documentation generation logic
-3. `src/data/interviewSections.ts` - Interview questions definition
-4. `src/types/interview.ts` - Type definitions
-5. `src/components/docs/DocumentationViewer.tsx` - Docs display
+3. `src/data/boilerplateComponents.ts` - Component library definitions
+4. `src/types/components.ts` - Component type definitions
+5. `src/components/boilerplate/ComponentSelector.tsx` - Component selection UI
+6. `src/components/docs/DocumentationViewer.tsx` - Docs display
 
 ### Configuration Files
 - `vite.config.ts` - Build configuration
@@ -311,5 +328,14 @@ interface Section {
 - **Tailwind**: [Tailwind CSS docs](https://tailwindcss.com)
 
 ---
+
+---
+
+**Key Architectural Change**: This project has pivoted from an AI-powered interview system to a **modular boilerplate component selection system**. Instead of asking questions and using AI to generate documentation, users now select pre-built components and the system combines pre-written documentation templates instantly. This approach is:
+- ✅ **Free**: No AI API costs
+- ✅ **Fast**: Instant generation (< 5 seconds)
+- ✅ **Consistent**: Same selections = same output
+- ✅ **Maintainable**: Pre-written, reviewed templates
+- ✅ **Testable**: Each component independently testable
 
 **Remember**: This project generates documentation for other projects. The documentation we create should be exemplary - clear, structured, and AI-friendly. Practice what we preach!

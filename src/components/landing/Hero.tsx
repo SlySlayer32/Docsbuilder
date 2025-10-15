@@ -12,12 +12,12 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Transform Ideas into
-              <span className="text-cyan-400"> AI-Ready Documentation</span>
+              Select Components,
+              <span className="text-cyan-400"> Generate Docs Instantly</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              Generate comprehensive project specifications through an intelligent interview process.
-              Build exactly what you envision with crystal-clear documentation.
+              Choose from pre-built boilerplate components and generate production-ready documentation in seconds.
+              No AI needed, just instant results.
             </p>
             <div className="flex gap-4">
               <button
