@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Landing } from '../pages/Landing';
 import { Dashboard } from '../pages/Dashboard';
-import { Interview } from '../pages/Interview';
+import { ComponentSelection } from '../pages/ComponentSelection';
 import { Documentation } from '../pages/Documentation';
 import { AuthModal } from './auth/AuthModal';
 import { DarkModeToggle } from './common/DarkModeToggle';
 import { generateDocumentation } from '../utils/docGenerator';
-import { Answer } from '../types/interview';
+import { TechStack } from '../types/components';
 
-type View = 'landing' | 'dashboard' | 'interview' | 'documentation';
+type View = 'landing' | 'dashboard' | 'component-selection' | 'documentation';
 
 
 export default function AppLayout() {
@@ -32,13 +32,14 @@ export default function AppLayout() {
   };
 
   const handleStartProject = (template?: string) => {
-    setCurrentView('interview');
+    setCurrentView('component-selection');
   };
 
-  const handleInterviewComplete = (answers: Answer[]) => {
-    console.log('🎯 [AppLayout] Interview complete, generating documentation...');
-    console.log('📋 [AppLayout] Answers:', answers);
-    const docs = generateDocumentation(answers, projectName);
+  const handleComponentSelectionComplete = (componentIds: string[], techStack: TechStack) => {
+    console.log('🎯 [AppLayout] Component selection complete, generating documentation...');
+    console.log('📋 [AppLayout] Selected components:', componentIds);
+    console.log('⚙️ [AppLayout] Tech stack:', techStack);
+    const docs = generateDocumentation(componentIds, techStack, projectName);
     console.log('📦 [AppLayout] Received docs object with', Object.keys(docs).length, 'files');
     setDocumentation(docs);
     setCurrentView('documentation');
@@ -58,7 +59,9 @@ export default function AppLayout() {
       <DarkModeToggle />
       {currentView === 'landing' && <Landing onGetStarted={handleGetStarted} />}
       {currentView === 'dashboard' && <Dashboard onStartProject={handleStartProject} />}
-      {currentView === 'interview' && <Interview onComplete={handleInterviewComplete} />}
+      {currentView === 'component-selection' && (
+        <ComponentSelection onComplete={handleComponentSelectionComplete} />
+      )}
       {currentView === 'documentation' && (
         <Documentation documentation={documentation} onExport={handleExport} />
       )}

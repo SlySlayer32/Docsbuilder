@@ -1,32 +1,58 @@
-import { Answer, SelectionOption } from '../types/interview';
+import { TechStack } from '../types/components';
+import { getComponentById } from '../data/boilerplateComponents';
 import { frontendMaps, backendMaps, databaseMaps } from '../data/technologyMaps';
 
-export const generateDocumentation = (answers: Answer[], projectName: string) => {
+export const generateDocumentation = (
+  componentIds: string[],
+  techStack: TechStack,
+  projectName: string
+) => {
   const docs: { [path: string]: string } = {};
 
-  const getAnswer = (questionId: string) => answers.find(a => a.questionId === questionId);
+  // Get selected components
+  const selectedComponents = componentIds
+    .map(id => getComponentById(id))
+    .filter(Boolean);
   
   console.log('🔍 [docGenerator] Starting documentation generation...');
   console.log('📝 [docGenerator] Project name:', projectName);
-  console.log('📊 [docGenerator] Total answers received:', answers.length);
+  console.log('🧩 [docGenerator] Selected components:', componentIds);
+  console.log('⚙️ [docGenerator] Tech stack:', techStack);
+
+  // Get technology maps
+  const frontendMap = frontendMaps[techStack.frontend];
+  const backendMap = backendMaps[techStack.backend];
+  const databaseMap = databaseMaps[techStack.database];
 
   // Project Overview
-  const purposeAnswer = getAnswer('purpose');
-  const targetUsersAnswer = getAnswer('target-users');
+  const componentList = selectedComponents.map(c => `- **${c!.name}**: ${c!.description}`).join('\n');
   
   docs['/project/overview.md'] = `# ${projectName}
 
 ## Project Overview
 
-This document provides a comprehensive overview of the ${projectName} project.
+This document provides a comprehensive overview of the ${projectName} project, built using a modular component-based architecture.
 
-## Purpose
+## Selected Components
 
-${purposeAnswer?.details || 'A modern software application designed to solve specific user needs.'}
+This project includes the following components:
 
-## Target Users
+${componentList}
 
-${targetUsersAnswer?.details || 'Our application serves a diverse user base with varying needs and technical expertise.'}
+## Technology Stack
+
+### Frontend
+**${frontendMap?.name || techStack.frontend}**: ${frontendMap?.description || 'Frontend framework'}
+
+### Backend
+**${backendMap?.name || techStack.backend}**: ${backendMap?.description || 'Backend technology'}
+
+### Database
+**${databaseMap?.name || techStack.database}**: ${databaseMap?.description || 'Database system'}
+
+## Architecture Approach
+
+This project follows a modular, component-based architecture where each feature is implemented as a self-contained component with clear interfaces and responsibilities.
 
 ## Goals
 
@@ -34,6 +60,7 @@ ${targetUsersAnswer?.details || 'Our application serves a diverse user base with
 - Build scalable and maintainable architecture
 - Ensure high performance and reliability
 - Maintain security and data privacy
+- Follow best practices for ${frontendMap?.name || 'frontend'}, ${backendMap?.name || 'backend'}, and ${databaseMap?.name || 'database'}
 
 ## Success Metrics
 
@@ -42,32 +69,117 @@ ${targetUsersAnswer?.details || 'Our application serves a diverse user base with
 - Page load time < 2 seconds
 - Zero critical security vulnerabilities`;
 
-  // Technical Architecture
-  const frontendAnswer = getAnswer('frontend');
-  const backendAnswer = getAnswer('backend');
-  const databaseAnswer = getAnswer('database');
+  // Generate component-specific documentation
+  selectedComponents.forEach(component => {
+    if (!component) return;
+    
+    const techStackKey = `${techStack.frontend}-${techStack.backend}-${techStack.database}`;
+    const componentDoc = component.documentation;
+    
+    // Create component-specific documentation file
+    const categoryPath = component.category.replace(/-/g, '_');
+    docs[`/components/${categoryPath}/${component.id}.md`] = componentDoc.overview;
+    
+    // Add technical implementation (use the most relevant tech stack or first available)
+    const implementationKey = Object.keys(componentDoc.technicalImplementation)[0] || '';
+    if (implementationKey) {
+      docs[`/components/${categoryPath}/${component.id}_implementation.md`] = 
+        componentDoc.technicalImplementation[implementationKey];
+    }
+    
+    // Add architecture documentation
+    docs[`/components/${categoryPath}/${component.id}_architecture.md`] = componentDoc.architecture;
+    
+    // Add security documentation
+    docs[`/components/${categoryPath}/${component.id}_security.md`] = componentDoc.security;
+    
+    // Add testing documentation
+    docs[`/components/${categoryPath}/${component.id}_testing.md`] = componentDoc.testing;
+    
+    // Add configuration documentation
+    docs[`/components/${categoryPath}/${component.id}_configuration.md`] = componentDoc.configuration;
+    
+    // Add API endpoints if available
+    if (componentDoc.apiEndpoints && componentDoc.apiEndpoints.length > 0) {
+      const apiDoc = `# ${component.name} - API Endpoints
+
+## Endpoints
+
+${componentDoc.apiEndpoints.map(endpoint => `### ${endpoint.method} ${endpoint.endpoint}
+
+**Description**: ${endpoint.description}
+
+${endpoint.request ? `**Request**:\n\`\`\`json\n${endpoint.request}\n\`\`\`` : ''}
+
+${endpoint.response ? `**Response**:\n\`\`\`json\n${endpoint.response}\n\`\`\`` : ''}
+`).join('\n')}`;
+      docs[`/api/${component.id}_endpoints.md`] = apiDoc;
+    }
+    
+    // Add database schema if available
+    if (componentDoc.databaseSchema) {
+      docs[`/database/${component.id}_schema.md`] = `# ${component.name} - Database Schema\n\n${componentDoc.databaseSchema}`;
+    }
+  });
+
+  // Technical Architecture Summary
+  // Create compatibility objects for old template references
+  const frontendAnswer = { selectedOptions: [techStack.frontend] };
+  const backendAnswer = { selectedOptions: [techStack.backend] };
+  const databaseAnswer = { selectedOptions: [techStack.database] };
+  const purposeAnswer = { details: `A modern ${projectName} application built with selected components` };
+  const targetUsersAnswer = { details: 'Application users who need the selected features' };
+  
+  // Create a compatibility getAnswer function for old code
+  const getAnswer = (questionId: string) => {
+    // Map question IDs to component-based answers
+    const hasAuth = selectedComponents.some(c => c!.category === 'authentication');
+    const hasPayments = selectedComponents.some(c => c!.category === 'payments');
+    const hasApi = selectedComponents.some(c => c!.category === 'api');
+    
+    switch (questionId) {
+      case 'auth':
+        return hasAuth ? { selectedOptions: ['email', 'social'] } : { selectedOptions: [] };
+      case 'payments':
+        return hasPayments ? { selectedOptions: ['yes-stripe'] } : { selectedOptions: ['no'] };
+      case 'api-design':
+        return hasApi ? { selectedOptions: ['rest'] } : { selectedOptions: ['rest'] };
+      case 'real-time':
+        return { selectedOptions: ['no'] };
+      case 'file-storage':
+        return { selectedOptions: ['no'] };
+      case 'search':
+        return { selectedOptions: ['no'] };
+      case 'email-service':
+        return { selectedOptions: ['no'] };
+      default:
+        return { selectedOptions: [], details: '' };
+    }
+  };
 
   docs['/architecture/tech-stack.md'] = `# Technology Stack
 
 ## Frontend
 
-**Framework**: ${frontendAnswer?.selectedOptions[0] || 'React'}
+**Framework**: ${frontendMap?.name || frontendAnswer}
 
-Modern, component-based architecture with:
-- TypeScript for type safety
-- Responsive design with Tailwind CSS
-- State management solution
-- Routing and navigation
+${frontendMap?.description || 'Modern frontend framework'}
+
+**Rationale**: ${frontendMap?.rationale || 'Chosen for its robustness and ecosystem'}
+
+### Best Practices
+${frontendMap?.bestPractices.map(practice => `- ${practice}`).join('\n') || '- Follow framework best practices'}
 
 ## Backend
 
-**Technology**: ${backendAnswer?.selectedOptions[0] || 'Node.js'}
+**Technology**: ${backendMap?.name || backendAnswer}
 
-RESTful API architecture with:
-- Authentication and authorization
-- Database integration
-- Business logic layer
-- Error handling and logging
+${backendMap?.description || 'Backend technology'}
+
+**Rationale**: ${backendMap?.rationale || 'Chosen for its performance and scalability'}
+
+### Best Practices
+${backendMap?.bestPractices.map(practice => `- ${practice}`).join('\n') || '- Follow backend best practices'}
 
 ## Database
 
@@ -261,13 +373,7 @@ ${getAnswer('search')?.selectedOptions[0] === 'elastic' ? '- Elasticsearch clust
 ${getAnswer('search')?.selectedOptions[0] === 'algolia' ? '- Algolia search service' : ''}`;
 
   // Architecture (arc42 Section 4-8)
-  const frontendTech = frontendAnswer?.selectedOptions[0] || 'react';
-  const backendTech = backendAnswer?.selectedOptions[0] || 'nodejs';
-  const databaseTech = databaseAnswer?.selectedOptions[0] || 'postgresql';
-  
-  const frontendMap = frontendMaps[frontendTech];
-  const backendMap = backendMaps[backendTech];
-  const databaseMap = databaseMaps[databaseTech];
+  // Using tech stack from component selection (already defined above)
 
   docs['/architecture/solution-strategy.md'] = `# Solution Strategy
 
