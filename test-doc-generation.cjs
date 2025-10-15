@@ -1,6 +1,6 @@
 /**
  * Test script to generate sample documentation and validate it
- * Run with: node test-doc-generation.js
+ * Run with: node test-doc-generation.cjs
  */
 
 const fs = require('fs');
